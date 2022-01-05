@@ -35,3 +35,7 @@ The kart score is determined by the following:
 The sum of all of these different point methods is a player's "Kart Score"
 
 The power rankings are the "Seeding Leaderboards" which is ordered by "Kart Score"
+
+
+**Additions since version 2.1**
+* None Yet :)
