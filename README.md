@@ -24,6 +24,7 @@
 Each Track has its own indivudal leaderboard to determine who is the best player on any given track, and the program also has a built in power rankings system which ranks all of the players by their "Kart Score"
 
 The track leaderboard is determined by - ((Players Points/Sum of All Players Points) x 100) + Players Average points per race.
+*The highst scorer per track is named "Track MVP" and gains bonus points towards their "Kart Score" while they hold that title
 
 The kart score is determined by the following:
 * 100 Points for winning a Grad Prix
