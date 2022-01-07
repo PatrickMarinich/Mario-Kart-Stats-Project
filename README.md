@@ -38,4 +38,12 @@ The power rankings are the "Seeding Leaderboards" which is ordered by "Kart Scor
 
 
 **Additions since version 2.1**
-* None Yet :)
+
+**v2.2** *(Jan 7 2022)*
+* Re-design of player stats output
+* Re-orginization of code execution order for determining when the database is updated compared to finding track MVPs
+* Points Per Race Leaderbaord
+* A Feature to view all track MVPs at once
+* Re-design of user input options
+* Track Nickname functionality for user inputs (currently 77 working track nicknames)
+
