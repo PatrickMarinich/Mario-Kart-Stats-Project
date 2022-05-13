@@ -38,6 +38,7 @@ The power rankings are the "Seeding Leaderboards" which is ordered by "Kart Scor
 
 
 **Additions since version 2.1**
+
 **v2.3** *(5/13/22)*
 
 * Blue Shells hit and Blue Shells Dodges implementation
