@@ -38,6 +38,16 @@ The power rankings are the "Seeding Leaderboards" which is ordered by "Kart Scor
 
 
 **Additions since version 2.1**
+**v2.3** *(5/13/22)*
+
+* Blue Shells hit and Blue Shells Dodges implementation
+* Updated Kart Score and Seeding to include these metrics
+* New Leaderboards for Blue Shells
+* Added New Selection option for user entering Blue Shell Data
+* Updated the Display Player Stats Function to include Blue Shells
+* Re-orginized Kart Score using Constant variables to allow for quick balance adjustments in the future.
+* Added Headings and sections so that the google collab Table of Contents was usuable
+* Re-orginized code into these sections so that similar functions are in the same grouping, allows for ease of access
 
 **v2.2** *(Jan 7 2022)*
 * Re-design of player stats output
