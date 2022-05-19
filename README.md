@@ -39,6 +39,26 @@ The power rankings are the "Seeding Leaderboards" which is ordered by "Kart Scor
 
 **Additions since version 2.1**
 
+**v3.0** *(5/19/22)*
+
+- Seasons Update!
+  - Seasons reset every couple of months to allow for play to be broken up during our time at college, currently there will be a summer and winter season
+  - This allows for balances changes to be made each season and create a more fair ranking system overtime as rules change
+  - An all time ranking will be determined by normializing each seasons points as a precent of their total, thus no matter the scoring system, the maximum possible points achieveavle is 100, before bonuses.
+  -To incentivize placement there will be multipliers to the 1st, 2nd, and 3rd highest scorers. 1.25, 1.125, 1.075 respectivley. Thus the maximum possible amount of all-time points to get in a season is 125.
+  -Each previous season will have their points reduced by 15% to ensure that the most recent season is the one with the most weight.
+- Whats New?
+  - A second database was created in google sheets to store all-time data
+  - A user option to end the current season and start a new one
+    - This function wipes the old season stats to zero and updates the all-time standings instead
+  - A new algorythem for determining the best all time player
+  - Balance Changes to the scoring system
+    - Reducing Points for Track MVP from 2 to 0.25
+    - Blue Shell Dodges 2 points
+    - Blue Shell Hit .25 points
+    - Shock Dodges Increased from 2 to 4 points
+
+
 **v2.3** *(5/13/22)*
 
 * Blue Shells hit and Blue Shells Dodges implementation
