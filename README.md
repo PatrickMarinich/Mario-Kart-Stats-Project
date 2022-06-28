@@ -6,7 +6,17 @@
 
 *The first version uploaded to github was version 2.1*
 
+
+**Below is the notes from the most recent google colab file**
+
+**Kartnite Stats** v3.2
+
+*Written by: Patrick Marinich*
+
+**Goal:** This scripts goal is to take user inputted *Mario Kart Wii* races and other stats and save them to a database to be used for calculations and analysis when user requested. 
+
 **Current Functionalities**
+
 *   Take in a user inputted race, with the track, players, and scores, and adds them to the database of all scores
 *   Keep track of how many times each player playes on a singular track
 * Get the average score per track of all of the players
@@ -16,30 +26,47 @@
 * The ability to search of all of the stats of a individual player, including total points, track averages, Track MVPs, and total power ranking points (Kart Score)
 * The ability to correct mistakes in entering race points, by having a user setting to manually edit the points of a specific player
 * Ability to view the database containing all of the data
-
-**How it works:** The majority of the code revolves around the idea of updating a google sheet file with 5 different sheets on it. The sheets contain: Total Points, Race Counts, Wins, Shock Dodges, and a partial "kart score" which is used for the implemented power ranking system. The google sheet file acts as a database that saves over different iterations of the program being ran, and thus will keep all of our previous race data saved. When the program is run it will read all of the sheets into a Pandas DataFrame object which is what is used for computation throughout the program. Depending on what the user wants to do, either input some type of data or view the data, the program will either save the inputs to the database or display the desired data to the user. 
-
-
-**Math Used For Rankings:**
-Each Track has its own indivudal leaderboard to determine who is the best player on any given track, and the program also has a built in power rankings system which ranks all of the players by their "Kart Score"
-
-The track leaderboard is determined by - ((Players Points/Sum of All Players Points) x 100) + Players Average points per race.
-*The highst scorer per track is named "Track MVP" and gains bonus points towards their "Kart Score" while they hold that title
-
-The kart score is determined by the following:
-* 100 Points for winning a Grad Prix
-* 1 Point for each point scored during a race
-* 2 points for each race played on a track that a player is the MVP on
-* 2 points for dodging a shock
-* 4 races worth of points for a players average track score for each track
-The sum of all of these different point methods is a player's "Kart Score"
-
-The power rankings are the "Seeding Leaderboards" which is ordered by "Kart Score"
+* Ability to view a players seasonal stats and their all time stats. 
+* Different seasonal leaderboards to show who is on top! 
 
 
-**Additions since version 2.1**
+**Important:** Make sure to run all cells before running the main cell, the main cell is the last one.
 
-**v3.0** *(5/19/22)*
+
+**Patch Notes**
+
+v3.2 (6/28/22)
+ - Kart Rating
+  - A new way to rate the players, it is similar to QBR in football where players are ranked out of a specific number, and compared to one another
+  - The catigories are:
+    - GP win %
+    - Average GP Points
+    - Tracks Owned Percentage
+- All Time Track Owners
+    - Determined 100% by average, as our sample size is large
+    - There is a 5 race minimum to qualifiy
+- Player Profiles
+    - A generated PDF using HTML/CSS formatting
+    - This PDF displays both seasonal and all-time stats
+    - Inludes progress triangles, to indcate if the player is playing well this current season
+    - The PDF is directally emailed to the player onces it is generated
+- All Time Leaderboards and other stats (Currently WIP)
+
+
+v3.1 (6/20/22)
+  - A new input (11) which allows the user to view all time stats
+  - This feature combines all of the current seasons stats with those in the perminate all time file to get all kinds of total statics about a players performance over time. 
+ 
+  Current stats include:
+    1. Total Points
+    2. Total Races
+    3. Average Placement Points
+    4. An estimation on GPs played
+    5. GP Wins
+    6. GP Win %
+    7. Shock Dodges, Blue shells, and other misc stats
+
+v3.0 (5/19/22)
 
 - Seasons Update!
   - Seasons reset every couple of months to allow for play to be broken up during our time at college, currently there will be a summer and winter season
@@ -59,22 +86,43 @@ The power rankings are the "Seeding Leaderboards" which is ordered by "Kart Scor
     - Shock Dodges Increased from 2 to 4 points
 
 
-**v2.3** *(5/13/22)*
+v2.3 (5/13/22)
+- Blue Shells hit and Blue Shells Dodges implementation 
+- Updated Kart Score and Seeding to include these metrics
+- New Leaderboards for Blue Shells
+- Added New Selection option for user entering Blue Shell Data
+- Updated the Display Player Stats Function to include Blue Shells
+- Re-orginized Kart Score using Constant variables to allow for quick balance adjustments in the future.
+- Added Headings and sections so that the google collab Table of Contents was usuable
+- Re-orginized code into these sections so that similar functions are in the same grouping, allows for ease of access
 
-* Blue Shells hit and Blue Shells Dodges implementation
-* Updated Kart Score and Seeding to include these metrics
-* New Leaderboards for Blue Shells
-* Added New Selection option for user entering Blue Shell Data
-* Updated the Display Player Stats Function to include Blue Shells
-* Re-orginized Kart Score using Constant variables to allow for quick balance adjustments in the future.
-* Added Headings and sections so that the google collab Table of Contents was usuable
-* Re-orginized code into these sections so that similar functions are in the same grouping, allows for ease of access
 
-**v2.2** *(Jan 7 2022)*
-* Re-design of player stats output
-* Re-orginization of code execution order for determining when the database is updated compared to finding track MVPs
-* Points Per Race Leaderbaord
-* A Feature to view all track MVPs at once
-* Re-design of user input options
-* Track Nickname functionality for user inputs (currently 77 working track nicknames)
+v2.2 (Jan 7 2022)
+- Re-design of player stats output
+- Re-orginization of code execution order for determining when the database is updated compared to finding track MVPs
+-Points Per Race Leaderbaord
+-A Feature to view all track MVPs at once
+-Re-design of user input options
+-Track Nickname functionality for user inputs (currently 77 working track nicknames)
+
+
+v2.1 (Jan 4 2022)
+- Optimization
+- Changes to 'Kart Score' 
+- MVP Leaderboards Per Track
+
+v2.0 (Jan 3 2022)
+ - Adds Shock Dodges 
+ - Adds GP Wins
+ - Adds Total Race Count
+ - Leaderboards
+
+v1.1 (Jan 2nd 2022)
+ - Moved the Main Method into a private method, this reduced the need for scrolling
+
+v1.0 (December 27 2021 - December 31st 2021)
+ - Importing and Saving Race Data
+ - Editing singular race scores incase of mistakes
+ - Viewing Track Records + Best Player on the Track
+ - Viewing Player Records
 
