@@ -2,10 +2,14 @@
 
 **Background:** My friends and I have been massive fans of the Mario Kart Wii game for years now. We tend to get into friendly arguments about who is the best both overall and on any given race. After these debates happened one of my friends created an excell spreadsheet to hold our race data so that we can compare our overall stats with one another to determine who is the best. The issue that we found very quickly was that it was slow and tedious to enter in and calculate all of the different things that we wanted to see. Thus the idea for a Python script of *Kartnite Stats* was born. Written in Google Collab's Python Envoirnment this script allows for us to have ease of input and access more data then we prevously thought possible. 
 
-**Info:** The Google Collab Files have documentation written on them with functionality and patch notes written on them, so listed below will be a summary.
+This is the first larger scale project that I have undertaken. I Have learned a bunch throughout the ongoing development process, This is mainly a for fun project, some of the code may not be optimized, but it accomplishes the main goal. Overall I continue to add features overtime whenever I find both the time and the motivation to implement them. As of now this is just used by my friends and I, and has been a great place to test new ideas and learn some new things.
 
 *The first version uploaded to github was version 2.1*
 
+**Things I've Learned During Development**
+* item 1
+* item 2
+* item 3
 
 **Below is the notes from the most recent google colab file**
 
