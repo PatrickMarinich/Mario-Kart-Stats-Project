@@ -13,7 +13,7 @@ This is the first larger scale project that I have undertaken. I Have learned a 
 
 **Below is the notes from the most recent google colab file**
 
-**Kartnite Stats** v3.2
+**Kartnite Stats** v3.2.1
 
 *Written by: Patrick Marinich*
 
@@ -39,6 +39,9 @@ This is the first larger scale project that I have undertaken. I Have learned a 
 
 **Patch Notes**
 
+v3.2.1 (7/1/22)
+- All Time Leaderboards are finished!
+
 v3.2 (6/28/22)
  - Kart Rating
   - A new way to rate the players, it is similar to QBR in football where players are ranked out of a specific number, and compared to one another
@@ -46,15 +49,30 @@ v3.2 (6/28/22)
     - GP win %
     - Average GP Points
     - Tracks Owned Percentage
-- All Time Track Owners
+    - All Time Track Owners
     - Determined 100% by average, as our sample size is large
     - There is a 5 race minimum to qualifiy
+
 - Player Profiles
     - A generated PDF using HTML/CSS formatting
     - This PDF displays both seasonal and all-time stats
     - Inludes progress triangles, to indcate if the player is playing well this current season
     - The PDF is directally emailed to the player onces it is generated
+
 - All Time Leaderboards and other stats (Currently WIP)
+  - All Time Power Points
+    - Found by looking at placements on other metric leaderboards
+    - 4 points per Kart Rating placement
+    - 3 points per Normalized Kart Score placement
+    - 2 points per Misc Score placement 
+  - All Time Normalized Kart Score
+  - All Time Kart Rating
+  - All Time Misc Score
+    - 8 points per blue dodge
+    - 0.5 points per blue hit
+    - 2 points per shock dodge
+  - All Time Average
+  - Other fun all Time stats!
 
 
 v3.1 (6/20/22)
@@ -129,4 +147,3 @@ v1.0 (December 27 2021 - December 31st 2021)
  - Editing singular race scores incase of mistakes
  - Viewing Track Records + Best Player on the Track
  - Viewing Player Records
-
