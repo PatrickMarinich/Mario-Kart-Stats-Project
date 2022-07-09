@@ -45,6 +45,11 @@ This is the first larger scale project that I have undertaken. I Have learned a 
 
 **Patch Notes**
 
+v3.2.2 (7/9/22)
+  - An update to the PDF Player Profile
+  - Uses the pandas df.to_html to include the lists of all of the seasonal and all-time track MVPs
+  -Further additions to the PDF are to follow soon!
+
 v3.2.1 (7/1/22)
 - All Time Leaderboards are finished!
 
@@ -153,3 +158,5 @@ v1.0 (December 27 2021 - December 31st 2021)
  - Editing singular race scores incase of mistakes
  - Viewing Track Records + Best Player on the Track
  - Viewing Player Records
+
+
