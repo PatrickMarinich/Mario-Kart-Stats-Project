@@ -45,6 +45,14 @@
 
 **Patch Notes**
 
+V3.2.3 (7/11/22)
+- All seasonal and all-time leaderboards were added to the player-profile PDF
+- This is using the same dataFrame features as the Track MVPs, however expanded to include leaderboards in inline boxes.
+- New Additions
+  - 10 All Time Leaderboards
+  - 6 Seasonal Leaderboards
+  - A header on page one showing the players All-Time Power Seed
+
 v3.2.2 (7/9/22)
   - An update to the PDF Player Profile
   - Uses the pandas df.to_html to include the lists of all of the seasonal and all-time track MVPs
@@ -158,5 +166,4 @@ v1.0 (December 27 2021 - December 31st 2021)
  - Editing singular race scores incase of mistakes
  - Viewing Track Records + Best Player on the Track
  - Viewing Player Records
-
 
