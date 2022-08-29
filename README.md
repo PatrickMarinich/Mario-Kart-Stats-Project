@@ -19,7 +19,7 @@
 
 **Below is the notes from the most recent google colab file**
 
-**Kartnite Stats** v3.2.1
+**Kartnite Stats** v3.2.4
 
 *Written by: Patrick Marinich*
 
@@ -38,12 +38,29 @@
 * Ability to view the database containing all of the data
 * Ability to view a players seasonal stats and their all time stats. 
 * Different seasonal leaderboards to show who is on top! 
+* A Player Profile which can be generated and emailed directally to a specified player given their email address.
+* These profiles include all of a players seasonal stats and all time stats along with all of the leaderboards that this software can produce. It is like a snapshot of that player's stats
 
 
 **Important:** Make sure to run all cells before running the main cell, the main cell is the last one.
 
 
 **Patch Notes**
+
+V3.2.4 (8/29/22)
+- An awards list was added to player profiles.
+  - Awards will be created and given on a seasonal basis
+  - a voting committee will be comprised of the most active players of the season and they will vote for each award and who they think is most deserving of it
+  - The winner of the award will have the award showcased on their player profile in a new section titled 'Trophy case'
+  - Awards may vary from season to season
+- Made adjustments in scoring in prep for the next season
+  - Reduced points for point scored to 0.25 from 0.35
+  - Increased GP points from 100 to 125
+  - Blue shell dodge to 8 points from 9 
+  - Shock dodge to 3 points from 3.5
+  - Blue shell hit to 0.5 poitns from 0.25
+- Adjusted the calculation of Track MVP to a more average based approach, lowered the percentage of total points, and increased the percentage of average
+- Created the foundational steps in to implementing a new set of stats to be calculated, such as first place count, top 3 count, ect. (not yet live)
 
 V3.2.3 (7/11/22)
 - All seasonal and all-time leaderboards were added to the player-profile PDF
@@ -163,6 +180,10 @@ v1.1 (Jan 2nd 2022)
 
 v1.0 (December 27 2021 - December 31st 2021)
  - Importing and Saving Race Data
+ - Editing singular race scores incase of mistakes
+ - Viewing Track Records + Best Player on the Track
+ - Viewing Player Records
+
  - Editing singular race scores incase of mistakes
  - Viewing Track Records + Best Player on the Track
  - Viewing Player Records
