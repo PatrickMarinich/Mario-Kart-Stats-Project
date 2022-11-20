@@ -598,7 +598,10 @@ def getAllTimeLeaderboads(season,allTime,TrackIndex,display = True):
     dfSeasonScores = pd.DataFrame({'Player': [], 'Season Score':[]})
     for index in dfFinalRanks.index:
     #make score percent of score of the total:
-      score = (int(dfFinalRanks.at[index,'Kart Score']) / SeasonalKartNormalizedScores) * 100
+      if SeasonalKartNormalizedScores != 0:
+        score = (int(dfFinalRanks.at[index,'Kart Score']) / SeasonalKartNormalizedScores) * 100
+      else:
+        score = 0
       #multiplier for placements
       if(index == 0):
         score *= 1.25
@@ -684,8 +687,8 @@ def getAllTimeLeaderboads(season,allTime,TrackIndex,display = True):
       #index of the player
       PlayerIndex = dfNormalizedKart.index[dfNormalizedKart['Player']==player].tolist()
       #generate power points based on leaderboard positions
-      kartPoints = (3 * len(dfNormalizedKart.index.values)) - (3*int(dfKartRankList[PlayerIndex]))
-      ratingPoints = (4 * len(dfKartRating.index.values)) - (4*int(dfRatingRankList[PlayerIndex]))
+      kartPoints = (3 * len(dfNormalizedKart.index.values)) - (3*(int(dfKartRankList[PlayerIndex])))
+      ratingPoints = (4 * len(dfKartRating.index.values)) - (4*(int(dfRatingRankList[PlayerIndex])))
       miscPoints = (1 * len(dfMiscScore.index.values)) - int(dfMiscRankList[PlayerIndex])
       #sum the points
       powerPoints = kartPoints + ratingPoints + miscPoints

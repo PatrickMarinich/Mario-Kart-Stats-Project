@@ -103,8 +103,11 @@ def end_season(season, all_time,TrackIndex):
   #blue Shells
   newShells,oldShells = transfer_data(season,all_time,'Blue Shells')
 
+  #Placements 
+  newPlacement, oldPlacement = transfer_data(season,all_time,'Placement Stats')
 
-  return newPoints,newRaceCount,newWins,newDodge,newOwned,newShells,dfAll_timeScores,oldPoints,oldRaceCount,oldWins,oldDodge,oldOwned,oldShells
+
+  return newPoints,newRaceCount,newWins,newDodge,newOwned,newShells,dfAll_timeScores,oldPoints,oldRaceCount,oldWins,oldDodge,oldOwned,oldShells,newPlacement,oldPlacement
 
  
 

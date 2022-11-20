@@ -23,7 +23,7 @@
 
 **Below is the notes from the most recent google colab file**
 
-**Kartnite Stats** v3.2.4
+**Kartnite Stats** v3.2.6
 
 *Written by: Patrick Marinich*
 
@@ -50,6 +50,14 @@
 
 
 **Patch Notes**
+V3.2.6 (11/20/2022)
+- Re-orginized the player profile code so that re-ordering the pages is possible if desired
+- New Pages should be able to be created in thge future easier as well
+- Bug fixes
+
+V3.2.5 (11/1/2022)
+- Created a full python version of this application to allow for easy collaberation in the future.
+- Bug fixes
 
 V3.2.4 (8/29/22)
 - An awards list was added to player profiles.

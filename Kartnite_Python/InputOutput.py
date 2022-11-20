@@ -344,7 +344,7 @@ def RunKartniteStats(version, contributors):
       all_time = gc.open_by_url('https://docs.google.com/spreadsheets/d/1nolol4P63e7WY-wRPnogcePkWuPPE3JF6QBRgXgF8gE/edit#gid=524408434')
       print("Ending Season....")
       #call end of season function
-      newPoints,newRaceCount,newWins,newDodge,newOwned,newShells,newSeeds,oldPoints,oldRaceCount,oldWins,oldDodge,oldOwned,oldShells = end_season(sh,all_time,TrackIndex)
+      newPoints,newRaceCount,newWins,newDodge,newOwned,newShells,newSeeds,oldPoints,oldRaceCount,oldWins,oldDodge,oldOwned,oldShells,newPlacement,oldPlacement = end_season(sh,all_time,TrackIndex)
       #prompt to end the season
       save = input("are you sure you want to save? ")
       if save == 'YES' or save == 'yes':
@@ -486,6 +486,7 @@ def RunKartniteStats(version, contributors):
       aKartScore = all_time.worksheet('Owned Score')
       aBlueShells = all_time.worksheet('Blue Shells')
       aSeeds = all_time.worksheet("All-Time Seeding")
+      aPlacement = all_time.worksheet("Placement Stats")
       #saves the data for the all time list
       set_with_dataframe(aTotalScores,newPoints)
       set_with_dataframe(aRaceCount,newRaceCount)
@@ -494,6 +495,7 @@ def RunKartniteStats(version, contributors):
       set_with_dataframe(aKartScore,newOwned)
       set_with_dataframe(aBlueShells,newShells)
       set_with_dataframe(aSeeds,newSeeds)
+      set_with_dataframe(aPlacement,newPlacement)
 
 
 
@@ -505,6 +507,7 @@ def RunKartniteStats(version, contributors):
       set_with_dataframe(WinCount,oldWins)
       set_with_dataframe(Shock,oldDodge)
       set_with_dataframe(BlueShells,oldShells)
+      set_with_dataframe(Placement,oldPlacement)
 
       print("The Seasonal Stats have been successfully merged into the All-Time Stats")
       print("Time for a new season to begin!")

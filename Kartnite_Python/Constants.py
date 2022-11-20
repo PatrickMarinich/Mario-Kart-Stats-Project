@@ -2,9 +2,22 @@
 #function will be used here as of now it is just a file to hold the player awards, but other things may be held here in the future
 
 #---CREDITS and other info-------
-VERSION = 'v2.3.5'
+VERSION = 'v3.2.6'
 CONTRIBUTORS = 'Patrick Marinich'
 #------------------------------------
+
+
+# Races Played Before Placementes were tracked, these will be used for accurate percentages and things
+PAT_RACES = 748.0
+CHRIS_RACES = 731.0
+DEMITRI_RACES = 666.0
+KEVIN_RACES = 508.0
+JOE_RACES = 291.0     
+MIKE_RACES = 53.0
+SHANE_RACES = 24.0
+JASON_RACES = 4.0
+
+
 
 
 #THESE ARE THE SEASONAL AWARDS
