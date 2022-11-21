@@ -18,7 +18,7 @@
     - MAIN.py - Run this file to run the code, it calls the I/O file.
     - PlayerProfile.py - The file that contains all the code to generate the player profile pdf
     - SeasonReset.py - Contains the functions nessassary to reset the season whenever a season is over
-    - StatGetters.oy - The functions which generate different stats for the user to view, or to be included in the player proflie
+    - StatGetters.py - The functions which generate different stats for the user to view, or to be included in the player proflie
     - wkhtmltopdf.exe - Program used to convert from html to a pdf
   - Sample_HTML_Outputs - Will contain an example of the HTML output of the player profile, so that it can be looked at over time. This will be updated with any major changes in the look of the player profile
 
