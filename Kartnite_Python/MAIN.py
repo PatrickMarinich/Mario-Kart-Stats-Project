@@ -9,7 +9,9 @@ from Constants import *
 #RUNS THE ENTIRE PROGRAM :)
 
 #credentials for loading must be stored in this file, if you need the credentials ask pat and he can send them
-# %APPDATA%\gspread\credentials.json
+
+#they must be stored at this place in your filesystem
+# ..\%APPDATA%\gspread\credentials.json
 
 
 RunKartniteStats(VERSION,CONTRIBUTORS)

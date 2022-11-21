@@ -16,23 +16,13 @@ from datetime import date
 
 #it will get all of the stats, generate html code, convert it to a pdf, and the email it out to the given player
 
-#installs needed for pdf conversion
+#CHECK AROUND LINES 150-160 FOR THE PAGE ORDER,CODE FOR PAGE GENERATION IS BELOW THIS
 
-
-
-##MIGHT BE NESSASSARY NOT SURE YET
-#wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb
-#%cp wkhtmltox_0.12.6-1.bionic_amd64.deb /usr/bin
-#%sudo apt install /usr/bin/wkhtmltox_0.12.6-1.bionic_amd64.deb
-#for emails
-#%pip install yagmail
 #############################################
 
 #this method generates all of the stats and wraps them in html tags and formatting
 
 def createPlayerProfile(season,allTime,player,TrackIndex):
-
-
   #----OPENING THE DATA----
   print('Loading Data....')
   #seasonal stats
@@ -141,17 +131,62 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
         allTimeAvgGPScore = (allTimeTotalPoints) / ( allTimeTotalRaces/8)
         allTimeFirstPlaceEquivilent =  allTimeTotalPoints/15
 
-  
+
+
+  #gets all of the all time leaderboards (10), this is needed all the way up here so that the players seed can be found
+  dfPowerPoints1,dfNormalizedKart1,dfKartRating1,dfMiscScore1,dfAllTimeWins1,dfAllTimeAverage1,dfAllTimeShockDodges1,dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1 = getAllTimeLeaderboads(season,allTime,TrackIndex,display = False)
+
+
+  #all of the stats are generated, so create the files
   #---------GENERATING THE HTML FILE---------
 
   #for output redirection later
   print('Generating HTML File...')
   default_stdout = sys.stdout
 
-  #-------ANY TEXT AND FORMATTING FOR THE PDF GOES HERE --------
+  #HTML File name and redirecting output
   filename = player + '.html'
   sys.stdout = open(filename, 'w')
- 
+
+
+  #---initalize HTML file with stlyles and headers
+  htmlHeaders()
+  
+  #----HTML Page Order for the PDF (these can be changed if the order wants to be changed)---
+  
+  #ADD PARAMATERS
+
+
+
+  ##Creates the first page of the PDF, has the player name, and thier seasonal and all time stats. #find what is needed and pass them in
+  coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seasonalFirstPlaceEquivilent,allTimeAverage,
+  dfSeasonWins,seasonalFirstPlaceRate,allTimeFirstPlaceRate,seasonalAvgGPScore,allTimeAvgGPScore,seasonalTracksOwned,allTimeTracksOwned,dfSeasonShock,
+  dfSeasonBlue,dfSeasonOwnedScore, allTimeTotalPoints,allTimeTotalRaces,allTimeFirstPlaceEquivilent,dfAllTimeWins,dfAllTimeShock,dfAllTimeBlue,dfAllTimeOwnedScore,dfPowerPoints1) 
+  
+  time.sleep(60) #API calls aint free
+
+  #shows all of the current and all time track mvps
+  trackMVPPage(dfSeasonScores,dfSeasonRaceCount,TrackIndex,dfAllTimeScores,dfAllTimeRaceCount) 
+
+
+  #page with seasonal leaderbaords
+  seasonalLeaderboardPage(season,TrackIndex,dfSeasonScores,dfSeasonRaceCount,dfSeasonWins,dfSeasonShock,dfSeasonBlue) 
+
+  allTimeLeaderboardsPages(dfPowerPoints1,dfNormalizedKart1,dfKartRating1,dfMiscScore1,dfAllTimeWins1,dfAllTimeAverage1,dfAllTimeShockDodges1,
+    dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1)  #two pages with all time boards
+
+    
+  awardsPage(player) #a page with the player awards
+
+ #----------Setting Output back to console--------
+  sys.stdout = default_stdout
+  print('Generation Complete')
+  return filename
+
+
+#CODE FOR MAKING PAGES GOES BELOW
+
+def htmlHeaders():
   #file headers
   print('<!DOCTYPE html>')
   print('<html>')
@@ -167,8 +202,10 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   print('<style> div.statbox2 {text-align: left; display: inline-block; align-items:left; width: 30%; height: 325px; border: 3px solid black; padding: 7px; margin: auto; vertical-align: top;text-overflow: ellipsis;white-space: nowrap;overflow: hidden; } </style>')
   print('<style> .arrow {border: solid black;border-width: 0 3px 3px 0;display: inline-block;padding: 3px;} .up {transform: rotate(-135deg); -webkit-transform: rotate(-135deg); border: solid green;border-width: 0 3px 3px 0;}.down {transform: rotate(45deg);-webkit-transform: rotate(45deg); border: solid red; border-width: 0 3px 3px 0;} </style>')
 
-  #----FILE TEXT------
-
+def coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seasonalFirstPlaceEquivilent,allTimeAverage,
+  dfSeasonWins,seasonalFirstPlaceRate,allTimeFirstPlaceRate,seasonalAvgGPScore,allTimeAvgGPScore,seasonalTracksOwned,allTimeTracksOwned,dfSeasonShock,
+  dfSeasonBlue,dfSeasonOwnedScore, allTimeTotalPoints,allTimeTotalRaces,allTimeFirstPlaceEquivilent,dfAllTimeWins,dfAllTimeShock,dfAllTimeBlue,dfAllTimeOwnedScore,dfPowerPoints1):
+ 
   #header
   print("<div class=\"center\">")
   print('<h1> Kartnite Profile:', player, '</h1>')
@@ -180,8 +217,6 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   print('<div class = \"bar\"> </div>')
 
 
-  #gets all of the all time leaderboards (10), this is needed all the way up here so that the players seed can be found
-  dfPowerPoints1,dfNormalizedKart1,dfKartRating1,dfMiscScore1,dfAllTimeWins1,dfAllTimeAverage1,dfAllTimeShockDodges1,dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1 = getAllTimeLeaderboads(season,allTime,TrackIndex,display = False)
   #gets the seed of the player
   playerIndex = dfPowerPoints1.index[dfPowerPoints1['Player']==player].tolist()
   seedingList = dfPowerPoints1['Seeding Power Points'].rank(ascending = False)
@@ -344,9 +379,6 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   #end center
   print('</div>')
 
-  ################################
-  #second page here (track mvps)
-  ################################
 
   print('<br>')
   print('<div class=\"bar\"> </div>')
@@ -354,6 +386,8 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   #page split
   print('<p style= \"page-break-after: always;\"> &nbsp; </p>')
   print('<p style= \"page-break-before: always;\"> &nbsp; </p>')
+
+def trackMVPPage(dfSeasonScores,dfSeasonRaceCount,TrackIndex,dfAllTimeScores,dfAllTimeRaceCount):
 
   print('<div class =\"center\">')
   #header
@@ -384,11 +418,11 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   #end center
   print('</div>')
 
-
-
-  #Page 3, Seasonal Leaderboards
+  #ending bar
   print('<br>')
   print('<div class=\"bar\"> </div>')
+
+def seasonalLeaderboardPage(season,TrackIndex,dfSeasonScores,dfSeasonRaceCount,dfSeasonWins,dfSeasonShock,dfSeasonBlue):
 
   #page split
   print('<p style= \"page-break-after: always;\"> &nbsp; </p>')
@@ -404,7 +438,6 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
 
   #a work around to get around the google api limit on 300 reads per minute, I do not have the current budget
   #to pay for more api calls lol
-  time.sleep(60)
 
   #generate the leaderboards
   kartSeasonalLeaderboard= getSeedings(season,TrackIndex,display = False)
@@ -454,11 +487,15 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   print('</div>')
   print('</div>')
 
-
-  #Page 4, All-Time Leaderboards
+  #end of page bar
   print('<br>')
   print('<div class=\"bar\"> </div>')
 
+def allTimeLeaderboardsPages(dfPowerPoints1,dfNormalizedKart1,dfKartRating1,dfMiscScore1,dfAllTimeWins1,dfAllTimeAverage1,dfAllTimeShockDodges1,
+    dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1):
+
+  #Page 4, All-Time Leaderboards
+ 
   #page split
   print('<p style= \"page-break-after: always;\"> &nbsp; </p>')
   print('<p style= \"page-break-before: always;\"> &nbsp; </p>')
@@ -544,10 +581,18 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   print('</div>')
 
 
+  #break line for page
+  print('<br>')
+  print('<br>')
+  print('<div class = \"bar\"> </div>')
+  print('<br>')
+
+def awardsPage(player):
 
   #page split Awards time
   print('<p style= \"page-break-after: always;\"> &nbsp; </p>')
   print('<p style= \"page-break-before: always;\"> &nbsp; </p>')
+
 
   
   #header
@@ -570,12 +615,6 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   print('<br>')
   print('<div class = \"bar\"> </div>')
   print('<br>')
-
-
-  #----------Setting Output back to console--------
-  sys.stdout = default_stdout
-  print('Generation Complete')
-  return filename
 
 
 #this function converts the html file into a pdf so it can be viewed nicely

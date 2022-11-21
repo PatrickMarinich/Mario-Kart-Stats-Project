@@ -1,5 +1,6 @@
 from InputFunctions import *
 from Constants import *
+from Kartnite_Python.PlayerProfile import createPlayerProfile
 from LeaderboardGenerators import *
 from PlayerProfile import *
 from SeasonReset import *
