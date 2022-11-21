@@ -1,6 +1,6 @@
 # Mario-Kart-Stats-Project
 
-**Recent Commit Changes:** Re-Orginization of ReadMe, added Documentation Folder, small bug fixes
+**Recent Commit Changes:** Re-Orginization of ReadMe, added Documentation Folder, small bug fixes, documentation for stats including  Kart Rating, Kart Score, Misc Score, and Seeding Power Points
 
 **Background:** My friends and I have been massive fans of the Mario Kart Wii game for years now. We tend to get into friendly arguments about who is the best both overall and on any given race. After these debates happened one of my friends created an excell spreadsheet to hold our race data so that we can compare our overall stats with one another to determine who is the best. The issue that we found very quickly was that it was slow and tedious to enter in and calculate all of the different things that we wanted to see. Thus the idea for a Python script of *Kartnite Stats* was born. Written in Google Collab's Python Envoirnment this script allows for us to have ease of input and access more data then we prevously thought possible. 
 
@@ -8,7 +8,11 @@
 
 **Table Of Contents:**
   - Documentation - This folder contains any and all documentation about Kartnite Stats, that I have written up
-    - Patch Notes
+    - Patch Notes - Version Updates go here!
+    - KartRating - a custom stat and its documentation -> An Average Based Stat
+    - KartSore - a custom stat and its documentation -> A Cumulative Stat
+    - MiscellenousScore - A custom stat and its documentation -> A Stat for Item Usuage
+    - SeedingPowerPoints - A custom stat and its documentation  -> A Stat to Determine the Best Overall Player
   - Kartnite_Google_Colab - Contains the current Google Colab version, and the ones previousally uploaded to github (future developement here will be infrequent)
   - Kartnite_Python - Has all of the python files, and is where current developement will happen
     - Contants.py - Contains any programming constants used, it also contains credits and player awards
@@ -34,6 +38,7 @@
 * Basic HTML and CSS syntax
 * Conversion for HTML to PDF using Python
 * Using Python to send Emails via Gmail
+* Working with The Google Sheets API
 
 **Goal:** This scripts goal is to take user inputted *Mario Kart Wii* races and other stats and save them to a database to be used for calculations and analysis when user requested. 
 
