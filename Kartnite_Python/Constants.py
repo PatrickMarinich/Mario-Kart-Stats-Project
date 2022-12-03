@@ -2,7 +2,7 @@
 #function will be used here as of now it is just a file to hold the player awards, but other things may be held here in the future
 
 #---CREDITS and other info-------
-VERSION = 'v3.2.6'
+VERSION = 'v3.3'
 CONTRIBUTORS = 'Patrick Marinich'
 #------------------------------------
 
@@ -46,6 +46,10 @@ AWARD_LIST = {'Pat' : PAT_AWARDS,
               'Chris' : CHRIS_AWARDS,
               'Kevin' : KEVIN_AWARDS,
               'Demitri' : DEMITRI_AWARDS,
-              'Joe' : JOE_AWARDS}
+              'Joe' : JOE_AWARDS,
+              'Karla': [],
+              'Mike' : [],
+              'Jason' : [],
+              'Matt' : []}
 
 

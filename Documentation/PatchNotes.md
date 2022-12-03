@@ -1,4 +1,12 @@
 **Patch Notes**
+V3.3 (12/2/22)
+- Created Kartnite Versus Rating (KVR) which is a new stat similar to that of ELO from chess, with the goal being another metric to help figure out who the best player is
+- KVR is calculated after every race, and a history of the past 50 races will be kept for comparision in the future.
+- KVR documentation and the math behind it will be aviable soon
+- Currently there is no way to view KVR, it will be added to the Player Proflies soon!!
+- Bug fixes
+- Condesed Programs, Kartnite Python will be the Player Proflie Generator, and the Google Colab file will be for the input of data
+
 V3.2.6 (11/20/2022)
 - Re-orginized the player profile code so that re-ordering the pages is possible if desired
 - New Pages should be able to be created in thge future easier as well

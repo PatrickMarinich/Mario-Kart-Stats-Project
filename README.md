@@ -1,6 +1,6 @@
 # Mario-Kart-Stats-Project
 
-**Recent Commit Changes:** Re-Orginization of ReadMe, added Documentation Folder, small bug fixes, documentation for stats including  Kart Rating, Kart Score, Misc Score, and Seeding Power Points
+**Recent Commit Changes:** Condensed the Python Program to only contain the script to read data from the sheets, and to create the player proflie. The google colab file was condensed to only take in inputs and add them to the sheets. New Update As well, Version 3.3, View the Patch Notes for Changes
 
 **Background:** My friends and I have been massive fans of the Mario Kart Wii game for years now. We tend to get into friendly arguments about who is the best both overall and on any given race. After these debates happened one of my friends created an excell spreadsheet to hold our race data so that we can compare our overall stats with one another to determine who is the best. The issue that we found very quickly was that it was slow and tedious to enter in and calculate all of the different things that we wanted to see. Thus the idea for a Python script of *Kartnite Stats* was born. Written in Google Collab's Python Envoirnment this script allows for us to have ease of input and access more data then we prevously thought possible. 
 
@@ -13,15 +13,13 @@
     - KartSore - a custom stat and its documentation -> A Cumulative Stat
     - MiscellenousScore - A custom stat and its documentation -> A Stat for Item Usuage
     - SeedingPowerPoints - A custom stat and its documentation  -> A Stat to Determine the Best Overall Player
-  - Kartnite_Google_Colab - Contains the current Google Colab version, and the ones previousally uploaded to github (future developement here will be infrequent)
-  - Kartnite_Python - Has all of the python files, and is where current developement will happen
+  - Kartnite_Google_Colab - The file used to input stats to the data base, it was origionally the full program, but it was condensed for simplicity.
+  - Kartnite_Python - Kartnite_Python is responsible for the generation of the Player Profiles
     - Contants.py - Contains any programming constants used, it also contains credits and player awards
-    - InputFunctions.py - Functions that Allow for user input into the google excel file
     - InputOutput.py - Contains the I/O logic for the user. Allows for user choice and different functionalities of the program
     - LeaderboardGenerators.py - Contains the functions which generate the different leaderboards
     - MAIN.py - Run this file to run the code, it calls the I/O file.
     - PlayerProfile.py - The file that contains all the code to generate the player profile pdf
-    - SeasonReset.py - Contains the functions nessassary to reset the season whenever a season is over
     - StatGetters.py - The functions which generate different stats for the user to view, or to be included in the player proflie
     - wkhtmltopdf.exe - Program used to convert from html to a pdf
   - Sample_HTML_Outputs - Will contain an example of the HTML output of the player profile, so that it can be looked at over time. This will be updated with any major changes in the look of the player profile
@@ -43,7 +41,6 @@
 **Goal:** This scripts goal is to take user inputted *Mario Kart Wii* races and other stats and save them to a database to be used for calculations and analysis when user requested. 
 
 **Current Functionalities**
-
 *   Take in a user inputted race, with the track, players, and scores, and adds them to the database of all scores
 *   Keep track of how many times each player playes on a singular track
 * Get the average score per track of all of the players

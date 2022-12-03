@@ -649,7 +649,8 @@ def sendReport(player,userEmail,userPass,message,pdfFile):
             'Kevin' : 'kevinfrancisjr@gmail.com',
             'Chris' : 'chrispauldragone@gmail.com',
             'Demitri' : 'dforand20@gmail.com',
-            'Joe' : 'frallerjo@gmail.com'}
+            'Joe' : 'frallerjo@gmail.com',
+            'Karla' : 'karlavsetzer@gmail.com'}
 
   #the user inputs their email infromation, to send the email
   user = yagmail.SMTP(user=userEmail, password=userPass)
