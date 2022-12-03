@@ -13,7 +13,6 @@
     - KartSore - a custom stat and its documentation -> A Cumulative Stat
     - MiscellenousScore - A custom stat and its documentation -> A Stat for Item Usuage
     - SeedingPowerPoints - A custom stat and its documentation  -> A Stat to Determine the Best Overall Player
-  - Kartnite_Google_Colab - The file used to input stats to the data base, it was origionally the full program, but it was condensed for simplicity.
   - Kartnite_Python - Kartnite_Python is responsible for the generation of the Player Profiles
     - Contants.py - Contains any programming constants used, it also contains credits and player awards
     - InputOutput.py - Contains the I/O logic for the user. Allows for user choice and different functionalities of the program
@@ -23,6 +22,7 @@
     - StatGetters.py - The functions which generate different stats for the user to view, or to be included in the player proflie
     - wkhtmltopdf.exe - Program used to convert from html to a pdf
   - Sample_HTML_Outputs - Will contain an example of the HTML output of the player profile, so that it can be looked at over time. This will be updated with any major changes in the look of the player profile
+  - Kartnite_Stats_Input.ipynb - The file used to input stats to the data base, it was origionally the full program, but it was condensed for simplicity.
 
 
 
