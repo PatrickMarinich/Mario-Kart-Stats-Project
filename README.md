@@ -1,6 +1,6 @@
 # Mario-Kart-Stats-Project
 
-**Recent Commit Changes:** Condensed the Python Program to only contain the script to read data from the sheets, and to create the player proflie. The google colab file was condensed to only take in inputs and add them to the sheets. New Update As well, Version 3.3, View the Patch Notes for Changes
+**Recent Commit Changes:** Condensed the Python Program to only contain the script to read data from the sheets, and to create the player proflie. The google colab file was condensed to only take in inputs and add them to the sheets. New Update As well, Version 3.3, View the Patch Notes for Changes. Added KVR Documentation, and updated the README.
 
 **Background:** My friends and I have been massive fans of the Mario Kart Wii game for years now. We tend to get into friendly arguments about who is the best both overall and on any given race. After these debates happened one of my friends created an excell spreadsheet to hold our race data so that we can compare our overall stats with one another to determine who is the best. The issue that we found very quickly was that it was slow and tedious to enter in and calculate all of the different things that we wanted to see. Thus the idea for a Python script of *Kartnite Stats* was born. Written in Google Collab's Python Envoirnment this script allows for us to have ease of input and access more data then we prevously thought possible. 
 
@@ -9,8 +9,9 @@
 **Table Of Contents:**
   - Documentation - This folder contains any and all documentation about Kartnite Stats, that I have written up
     - Patch Notes - Version Updates go here!
-    - KartRating - a custom stat and its documentation -> An Average Based Stat
-    - KartSore - a custom stat and its documentation -> A Cumulative Stat
+    - KartRating - A custom stat and its documentation -> An Average Based Stat
+    - KartSore - A custom stat and its documentation -> A Cumulative Stat
+    - KartVersusRating - A custom stat and its documentation -> A Stat similar to chess ELO, aimed to taking into account both your outcomes and opponets strength overtime.
     - MiscellenousScore - A custom stat and its documentation -> A Stat for Item Usuage
     - SeedingPowerPoints - A custom stat and its documentation  -> A Stat to Determine the Best Overall Player
   - Kartnite_Python - Kartnite_Python is responsible for the generation of the Player Profiles
@@ -20,9 +21,9 @@
     - MAIN.py - Run this file to run the code, it calls the I/O file.
     - PlayerProfile.py - The file that contains all the code to generate the player profile pdf
     - StatGetters.py - The functions which generate different stats for the user to view, or to be included in the player proflie
-    - wkhtmltopdf.exe - Program used to convert from html to a pdf
+    - wkhtmltopdf.exe - Program used to convert from html to a pdf (did not create this it is found here https://github.com/wkhtmltopdf/wkhtmltopdf)
   - Sample_HTML_Outputs - Will contain an example of the HTML output of the player profile, so that it can be looked at over time. This will be updated with any major changes in the look of the player profile
-  - Kartnite_Stats_Input.ipynb - The file used to input stats to the data base, it was origionally the full program, but it was condensed for simplicity.
+  - Kartnite_Stats_Input.ipynb - The file used to input stats to the data base, it was origionally the full program, but it was condensed for simplicity to only have the functionality of inputting data.
 
 
 
@@ -38,7 +39,7 @@
 * Using Python to send Emails via Gmail
 * Working with The Google Sheets API
 
-**Goal:** This scripts goal is to take user inputted *Mario Kart Wii* races and other stats and save them to a database to be used for calculations and analysis when user requested. 
+**Goal:** This scripts goal is to take user inputted *Mario Kart Wii* races and other stats and save them to a "database" to be used for calculations and analysis when user requested. 
 
 **Current Functionalities**
 *   Take in a user inputted race, with the track, players, and scores, and adds them to the database of all scores
@@ -54,6 +55,8 @@
 * Different seasonal leaderboards to show who is on top! 
 * A Player Profile which can be generated and emailed directally to a specified player given their email address.
 * These profiles include all of a players seasonal stats and all time stats along with all of the leaderboards that this software can produce. It is like a snapshot of that player's stats
+* Includes Custom statical metrics that I have created to help show our comparative skill levels
+* Player awards are voted on by us at the end of a season, and they can be added to the player profiles!
 
 
 
