@@ -32,7 +32,9 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   Shock = season.worksheet('Shock Dodges').get_all_values()
   OwnedScore = season.worksheet('Owned Score').get_all_values()
   Blue = season.worksheet('Blue Shells').get_all_values()
-    
+  kvr = season.worksheet('KVR Stats').get_all_values()
+  placement = season.worksheet('Placement Stats').get_all_values()
+
   #alltime stats
   kartDataAllTime = allTime.worksheet('Total Scores').get_all_values()
   RaceCountAllTime = allTime.worksheet('Race Count').get_all_values()
@@ -43,6 +45,7 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
 
   BlueAllTime = allTime.worksheet('Blue Shells').get_all_values()
   SeedingAllTime = allTime.worksheet('All-Time Seeding').get_all_values()
+  placementAllTime = allTime.worksheet('Placement Stats').get_all_values()
   
 
   print('Analyzing Old and New Data....')
@@ -54,6 +57,8 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   dfSeasonWins = pd.DataFrame(Wins[1:], columns = Wins[0])
   dfSeasonShock = pd.DataFrame(Shock[1:], columns = Shock[0])
   dfSeasonBlue = pd.DataFrame(Blue[1:], columns = Blue[0])
+  dfKVR = pd.DataFrame(kvr[1:],columns = kvr[0])
+  dfSeasonPlacement = pd.DataFrame(placement[1:],columns = placement[0])
 
   #all time
   dfAllTimeOwnedScore = pd.DataFrame(OwnedScoreAllTime[1:], columns = OwnedScoreAllTime[0])
@@ -63,6 +68,7 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   dfAllTimeShock = pd.DataFrame(ShockAllTime[1:], columns = ShockAllTime[0])
   dfAllTimeBlue = pd.DataFrame(BlueAllTime[1:], columns = BlueAllTime[0])
   dfAllTimeSeeding = pd.DataFrame(SeedingAllTime[1:], columns =SeedingAllTime[0])
+  dfAllTimePlacement = pd.DataFrame(placementAllTime[1:],columns = placementAllTime[0])
 
   print('Doing Calculations...')
  
@@ -102,12 +108,10 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
         seasonalAverage = 0
         seasonalFirstPlaceRate = 0
         seasonalAvgGPScore= 0
-        seasonalFirstPlaceEquivilent = 0
       else:
         seasonalAverage = seasonalTotalPoints/seasonalTotalRaces
         seasonalFirstPlaceRate = (int(dfSeasonWins.at[0,player]) / (seasonalTotalRaces/8))*100
         seasonalAvgGPScore = (seasonalTotalPoints) / (seasonalTotalRaces/8)
-        seasonalFirstPlaceEquivilent = seasonalTotalPoints/15
 
     #Players AllTime stats
     allTimeTotalPoints = 0
@@ -124,13 +128,23 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
         allTimeAverage = 0
         allTimeFirstPlaceRate = 0
         allTimeAvgGPScore= 0
-        allTimeFirstPlaceEquivilent = 0
       else:
         allTimeAverage =  allTimeTotalPoints/ allTimeTotalRaces
         allTimeFirstPlaceRate = (int(dfAllTimeWins.at[0,player]) / (allTimeTotalRaces/8))*100
         allTimeAvgGPScore = (allTimeTotalPoints) / ( allTimeTotalRaces/8)
-        allTimeFirstPlaceEquivilent =  allTimeTotalPoints/15
+  
 
+  time.sleep(60) #API calls aint free
+
+  #placement stats
+  seasonaltop1 = int(dfSeasonPlacement.at[0,player])
+  seasonaltop2 = int(dfSeasonPlacement.at[1,player])
+  seasonaltop3= int(dfSeasonPlacement.at[2,player])
+  seasonaltop4 = int(dfSeasonPlacement.at[3,player])
+  allTimetop1 = int(dfAllTimePlacement.at[0,player]) + seasonaltop1
+  allTimetop2 = int(dfAllTimePlacement.at[1,player]) + seasonaltop2
+  allTimetop3 = int(dfAllTimePlacement.at[2,player]) + seasonaltop3
+  allTimetop4 = int(dfAllTimePlacement.at[3,player]) + seasonaltop4
 
 
   #gets all of the all time leaderboards (10), this is needed all the way up here so that the players seed can be found
@@ -154,16 +168,15 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   
   #----HTML Page Order for the PDF (these can be changed if the order wants to be changed)---
   
-  #ADD PARAMATERS
-
-
-
   ##Creates the first page of the PDF, has the player name, and thier seasonal and all time stats. #find what is needed and pass them in
-  coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seasonalFirstPlaceEquivilent,allTimeAverage,
+  coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seasonaltop1,allTimeAverage,
   dfSeasonWins,seasonalFirstPlaceRate,allTimeFirstPlaceRate,seasonalAvgGPScore,allTimeAvgGPScore,seasonalTracksOwned,allTimeTracksOwned,dfSeasonShock,
-  dfSeasonBlue,dfSeasonOwnedScore, allTimeTotalPoints,allTimeTotalRaces,allTimeFirstPlaceEquivilent,dfAllTimeWins,dfAllTimeShock,dfAllTimeBlue,dfAllTimeOwnedScore,dfPowerPoints1) 
+  dfSeasonBlue,dfSeasonOwnedScore, allTimeTotalPoints,allTimeTotalRaces,allTimetop1,dfAllTimeWins,dfAllTimeShock,dfAllTimeBlue,dfAllTimeOwnedScore,dfPowerPoints1,
+  seasonaltop2,seasonaltop3,seasonaltop4,allTimetop2,allTimetop3,allTimetop4) 
   
-  time.sleep(60) #API calls aint free
+
+  #KVR History Page
+  KVRHistoryPage(player,dfKVR)
 
   #shows all of the current and all time track mvps
   trackMVPPage(dfSeasonScores,dfSeasonRaceCount,TrackIndex,dfAllTimeScores,dfAllTimeRaceCount) 
@@ -196,15 +209,16 @@ def htmlHeaders():
   print('<style> div.center {text-align: center; } </style>')
   print('<style> div.bar { display: flex; align-items: center; width: 100%; height: 3px; background-color: #1faadb; padding: 4px;} </style>')
   print('<style> div.left {text-align: left; } </style>')
-  print('<style> div.statbox {text-align: left; display: inline-block; align-items:left; width: 30%; height: 250px; border: 3px solid black; padding: 7px; margin: auto; vertical-align: top;} </style>')
+  print('<style> div.statbox {text-align: left; display: inline-block; align-items:left; width: 30%; height: 320px; border: 3px solid black; padding: 7px; margin: auto; vertical-align: top;} </style>')
   print('<style> div.leaderboard {text-align:center; display: inline-block; align-items:center; width: 45%; height: 950px; border: 1px solid black; padding: 4px; margin: auto; vertical-align: top; margin:auto;} </style>')
   print('<style> div.empty {display: flex; width: 100%; height: 15px;} </style>')
   print('<style> div.statbox2 {text-align: left; display: inline-block; align-items:left; width: 30%; height: 325px; border: 3px solid black; padding: 7px; margin: auto; vertical-align: top;text-overflow: ellipsis;white-space: nowrap;overflow: hidden; } </style>')
   print('<style> .arrow {border: solid black;border-width: 0 3px 3px 0;display: inline-block;padding: 3px;} .up {transform: rotate(-135deg); -webkit-transform: rotate(-135deg); border: solid green;border-width: 0 3px 3px 0;}.down {transform: rotate(45deg);-webkit-transform: rotate(45deg); border: solid red; border-width: 0 3px 3px 0;} </style>')
 
-def coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seasonalFirstPlaceEquivilent,allTimeAverage,
+def coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seasonaltop1,allTimeAverage,
   dfSeasonWins,seasonalFirstPlaceRate,allTimeFirstPlaceRate,seasonalAvgGPScore,allTimeAvgGPScore,seasonalTracksOwned,allTimeTracksOwned,dfSeasonShock,
-  dfSeasonBlue,dfSeasonOwnedScore, allTimeTotalPoints,allTimeTotalRaces,allTimeFirstPlaceEquivilent,dfAllTimeWins,dfAllTimeShock,dfAllTimeBlue,dfAllTimeOwnedScore,dfPowerPoints1):
+  dfSeasonBlue,dfSeasonOwnedScore, allTimeTotalPoints,allTimeTotalRaces,allTimetop1,dfAllTimeWins,dfAllTimeShock,dfAllTimeBlue,dfAllTimeOwnedScore,dfPowerPoints1,
+  seasonaltop2,seasonaltop3,seasonaltop4,allTimetop2,allTimetop3,allTimetop4):
  
   #header
   print("<div class=\"center\">")
@@ -254,8 +268,10 @@ def coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seas
   else:
      print('<p>Average Placement Points: ', seasonalAverage, '<i class="arrow down"></i>','</p>')
 
-  print('<p>First Place Equivalents: ', seasonalFirstPlaceEquivilent,'</p>')
-
+  print('<p>First Places: ', seasonaltop1,'</p>')
+  print('<p>Top 2 Finishes: ', seasonaltop2,'</p>')
+  print('<p>Top 3 Finishes: ', seasonaltop3,'</p>')
+  print('<p>Top 4 Finishes: ', seasonaltop4,'</p>')
   print('</div>')
 
   #stat box center for GP
@@ -345,7 +361,10 @@ def coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seas
   print('<p>Total Race Points: ',  allTimeTotalPoints, '</p>')
   print('<p>Total Race Count: ',  allTimeTotalRaces,'</p>')
   print('<p>Average Placement Points: ',  allTimeAverage,'</p>')
-  print('<p>First Place Equivalents: ',  allTimeFirstPlaceEquivilent,'</p>')
+  print('<p>First Places: ',  allTimetop1,'</p>')
+  print('<p>Top 2 Finishes: ',  allTimetop2,'</p>')
+  print('<p>Top 3 Finishes: ',  allTimetop3,'</p>')
+  print('<p>Top 4 Finishes: ',  allTimetop4,'</p>')
 
   print('</div>')
 
@@ -383,11 +402,12 @@ def coverPage(player,seasonalTotalPoints,seasonalAverage,seasonalTotalRaces,seas
   print('<br>')
   print('<div class=\"bar\"> </div>')
 
+ 
+
+def trackMVPPage(dfSeasonScores,dfSeasonRaceCount,TrackIndex,dfAllTimeScores,dfAllTimeRaceCount):
   #page split
   print('<p style= \"page-break-after: always;\"> &nbsp; </p>')
   print('<p style= \"page-break-before: always;\"> &nbsp; </p>')
-
-def trackMVPPage(dfSeasonScores,dfSeasonRaceCount,TrackIndex,dfAllTimeScores,dfAllTimeRaceCount):
 
   print('<div class =\"center\">')
   #header
@@ -617,6 +637,46 @@ def awardsPage(player):
   print('<br>')
 
 
+def KVRHistoryPage(player,dfKVR):
+  #page split
+  print('<p style= \"page-break-after: always;\"> &nbsp; </p>')
+  print('<p style= \"page-break-before: always;\"> &nbsp; </p>')
+
+  #page header
+  #header
+  print('<div class =\"center\">')
+  print('<h1> Kart Versus Raiting History (KVR) </h1>')
+  print('</div>')
+
+  #break line
+  print('<br>')
+  print('<br>')
+  print('<div class = \"bar\"> </div>')
+
+  #center the graph
+  print('<div class =\"center\">')
+  #get the embedded HTML for the plot
+  make_line_plot(dfKVR,player)
+  
+  #Windows needs to use exact path :( , maybe realitive pathing will work in the future with wkhtmltopdf windows
+  path = 'C:\\Users\\patri\\Github_Directories\\Kartnite\\Mario-Kart-Stats-Project\\Kartnite_Python\\KVRHistory.png'
+  #path = '.\\Kartnite_Python\\KVRHistory.png'
+  
+  print('<img src=', path, 'alt=\"KVR History\" width=\"1000\" height=\"800\">' )
+
+  print('</div>')
+
+
+
+###IMPUT NEW PAGES HERE
+
+
+
+
+
+
+
+
 #this function converts the html file into a pdf so it can be viewed nicely
 def convertHTMLtoPDF(filename):
   print('Converting to PDF...')
@@ -632,12 +692,10 @@ def convertHTMLtoPDF(filename):
   
   #Convert
   output = 'Kartnite Stats - ' + today + '.pdf'
-  pdfkit.from_file(currFile, output_path=output, configuration=config)
+  pdfkit.from_file(currFile, output_path=output, configuration=config,options={"enable-local-file-access": ""})
   print('Conversion Complete...')
 
   return output
-
-
 
 #this is for emailing the created PDF to the player that it was generated for
 import yagmail

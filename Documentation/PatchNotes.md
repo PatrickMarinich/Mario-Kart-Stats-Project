@@ -1,4 +1,10 @@
 **Patch Notes**
+V3.3.1
+ - (12/20/22) -> Added a KVR History Chart to the Player Proflie, shows the players KVR trend over the past 50 races
+ - (1/2/23) -> fixed up the issues with KVR history chart, added a header to the page and reseized the image, Reorded the Pages
+ - (1/2/23) -> removed First Place Equivielents, replaced with actual first place count, also added in top 2,3,4 finishes as well
+ - (1/3/23) -> resized some boxes, bug fixes
+
 V3.3 (12/2/22)
 - Created Kartnite Versus Rating (KVR) which is a new stat similar to that of ELO from chess, with the goal being another metric to help figure out who the best player is
 - KVR is calculated after every race, and a history of the past 50 races will be kept for comparision in the future.

@@ -2,7 +2,7 @@
 #function will be used here as of now it is just a file to hold the player awards, but other things may be held here in the future
 
 #---CREDITS and other info-------
-VERSION = 'v3.3'
+VERSION = 'v3.3.1'
 CONTRIBUTORS = 'Patrick Marinich'
 #------------------------------------
 
@@ -16,9 +16,10 @@ JOE_RACES = 291.0
 MIKE_RACES = 53.0
 SHANE_RACES = 24.0
 JASON_RACES = 4.0
+#for itneractive access use
+PLAYER_RACES_DICT = {"Pat" : PAT_RACES, "Chris": CHRIS_RACES,"Demitri": DEMITRI_RACES, "Kevin": KEVIN_RACES, "Joe": JOE_RACES, "Mike": MIKE_RACES, "Shane": SHANE_RACES, "Jason":JASON_RACES}
 
-
-
+#------------------------------
 
 #THESE ARE THE SEASONAL AWARDS
 

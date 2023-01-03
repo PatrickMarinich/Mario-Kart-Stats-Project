@@ -775,3 +775,25 @@ def getKartRating(dfScores,dfRaces,dfWins,player,TrackIndex):
 
 
   return KartRating
+
+
+##creates a line plot of a players KVR history over the last 50 races 
+import matplotlib.pyplot as plt
+import mpld3
+def make_line_plot(df, column):
+    # Remove the first two rows
+    df = df.iloc[2:]
+    #make everything ints
+    df = df.astype(int)
+    #reverse the order so it is a history
+    df = df.iloc[::-1].reset_index(drop=True)
+    #create a line plot
+   
+    val = df[column].plot(x ="Race History",y = 'KVR', kind='line')
+    plt.xlabel('Past 50 Races (0 = fifty races ago, 50 = most recent race)')
+    plt.ylabel('KVR Value')
+    name = 'KVRHistory.png'
+    plt.savefig('Kartnite_Python\KVRHistory.png')
+    
+    return name
+   

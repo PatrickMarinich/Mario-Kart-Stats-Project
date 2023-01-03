@@ -1,6 +1,6 @@
 # Mario-Kart-Stats-Project
 
-**Recent Commit Changes:** Condensed the Python Program to only contain the script to read data from the sheets, and to create the player proflie. The google colab file was condensed to only take in inputs and add them to the sheets. New Update As well, Version 3.3, View the Patch Notes for Changes. Added KVR Documentation, and updated the README.
+**Recent Commit Changes:** Version 3.3.1!!! Version updates are in the patch notes file in the documentation folder
 
 **Background:** My friends and I have been massive fans of the Mario Kart Wii game for years now. We tend to get into friendly arguments about who is the best both overall and on any given race. After these debates happened one of my friends created an excell spreadsheet to hold our race data so that we can compare our overall stats with one another to determine who is the best. The issue that we found very quickly was that it was slow and tedious to enter in and calculate all of the different things that we wanted to see. Thus the idea for a Python script of *Kartnite Stats* was born. Written in Google Collab's Python Envoirnment this script allows for us to have ease of input and access more data then we prevously thought possible. 
 

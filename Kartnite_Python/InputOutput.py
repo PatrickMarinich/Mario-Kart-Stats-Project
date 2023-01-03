@@ -187,7 +187,10 @@ def RunKartniteStats(version, contributors):
   
   #put any test leaderboards or stats here to make sure that they work as expected before they go into the pdf
   elif selection == '2':
-    print('There is nothing to currently test')
+    kvr = sh.worksheet('KVR Stats').get_all_values()
+    dfKVR = pd.DataFrame(kvr[1:],columns = kvr[0])
+    text = make_line_plot(dfKVR,'Pat')
+    print(text)
 
 
   #invalid selection
