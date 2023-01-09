@@ -1,4 +1,8 @@
 **Patch Notes**
+V3.3.2
+- (1/3/23) -> added placement leaderboards stats to the seasonal page and on the all time page, spelling and bug fixes
+- (1/9/23) -> Bug fixes in the google colab input file
+
 V3.3.1
  - (12/20/22) -> Added a KVR History Chart to the Player Proflie, shows the players KVR trend over the past 50 races
  - (1/2/23) -> fixed up the issues with KVR history chart, added a header to the page and reseized the image, Reorded the Pages

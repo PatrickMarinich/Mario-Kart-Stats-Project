@@ -90,6 +90,17 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
     dfAllTimeBlue.loc[0,racer] = int(dfAllTimeBlue.loc[0,racer]) + int(dfSeasonBlue.loc[0,racer])
     dfAllTimeBlue.loc[1,racer] = int(dfAllTimeBlue.loc[1,racer]) + int(dfSeasonBlue.loc[1,racer])
 
+    #placement is 4 rows
+    dfAllTimePlacement.loc[0,racer] = int(dfAllTimePlacement.loc[0,racer]) + int(dfSeasonPlacement.loc[0,racer])
+    dfAllTimePlacement.loc[1,racer] = int(dfAllTimePlacement.loc[1,racer]) + int(dfSeasonPlacement.loc[1,racer])
+    dfAllTimePlacement.loc[2,racer] = int(dfAllTimePlacement.loc[2,racer]) + int(dfSeasonPlacement.loc[2,racer])
+    dfAllTimePlacement.loc[3,racer] = int(dfAllTimePlacement.loc[3,racer]) + int(dfSeasonPlacement.loc[3,racer])
+
+
+
+
+
+
 
   #all data is now combined, so do any calculations for stats :)
   
@@ -113,7 +124,7 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
         seasonalFirstPlaceRate = (int(dfSeasonWins.at[0,player]) / (seasonalTotalRaces/8))*100
         seasonalAvgGPScore = (seasonalTotalPoints) / (seasonalTotalRaces/8)
 
-    #Players AllTime stats
+    #-----Players AllTime stats-----------
     allTimeTotalPoints = 0
     allTimeTotalRaces = 0
     allTimeTracksOwned = 0
@@ -141,14 +152,20 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   seasonaltop2 = int(dfSeasonPlacement.at[1,player])
   seasonaltop3= int(dfSeasonPlacement.at[2,player])
   seasonaltop4 = int(dfSeasonPlacement.at[3,player])
-  allTimetop1 = int(dfAllTimePlacement.at[0,player]) + seasonaltop1
-  allTimetop2 = int(dfAllTimePlacement.at[1,player]) + seasonaltop2
-  allTimetop3 = int(dfAllTimePlacement.at[2,player]) + seasonaltop3
-  allTimetop4 = int(dfAllTimePlacement.at[3,player]) + seasonaltop4
+  allTimetop1 = int(dfAllTimePlacement.at[0,player])
+  allTimetop2 = int(dfAllTimePlacement.at[1,player]) 
+  allTimetop3 = int(dfAllTimePlacement.at[2,player])
+  allTimetop4 = int(dfAllTimePlacement.at[3,player])
 
 
   #gets all of the all time leaderboards (10), this is needed all the way up here so that the players seed can be found
   dfPowerPoints1,dfNormalizedKart1,dfKartRating1,dfMiscScore1,dfAllTimeWins1,dfAllTimeAverage1,dfAllTimeShockDodges1,dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1 = getAllTimeLeaderboads(season,allTime,TrackIndex,display = False)
+
+  #generation of the seasonal and all time placement leaderboards for count 
+  dfSeasonFirst,dfSeasonSecond,dfSeasonThird,dfSeasonFourth = getPlacementLeaderboards(dfSeasonPlacement,display = False)
+  dfAllTimeFirst,dfAllTimeSecond,dfAllTimeThird,dfAllTimeFourth = getPlacementLeaderboards(dfAllTimePlacement,display = False)
+
+  ##do percentages here
 
 
   #all of the stats are generated, so create the files
@@ -181,12 +198,14 @@ def createPlayerProfile(season,allTime,player,TrackIndex):
   #shows all of the current and all time track mvps
   trackMVPPage(dfSeasonScores,dfSeasonRaceCount,TrackIndex,dfAllTimeScores,dfAllTimeRaceCount) 
 
+  time.sleep(30) #API Calls are NOT FREE
 
-  #page with seasonal leaderbaords
-  seasonalLeaderboardPage(season,TrackIndex,dfSeasonScores,dfSeasonRaceCount,dfSeasonWins,dfSeasonShock,dfSeasonBlue) 
+  #pages with seasonal leaderbaords
+  seasonalLeaderboardPage(season,TrackIndex,dfSeasonScores,dfSeasonRaceCount,dfSeasonWins,dfSeasonShock,dfSeasonBlue,dfSeasonFirst,dfSeasonSecond,dfSeasonThird,dfSeasonFourth) 
 
+  #pages with all time boards
   allTimeLeaderboardsPages(dfPowerPoints1,dfNormalizedKart1,dfKartRating1,dfMiscScore1,dfAllTimeWins1,dfAllTimeAverage1,dfAllTimeShockDodges1,
-    dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1)  #two pages with all time boards
+    dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1,dfAllTimeFirst,dfAllTimeSecond,dfAllTimeThird,dfAllTimeFourth)  
 
     
   awardsPage(player) #a page with the player awards
@@ -442,7 +461,7 @@ def trackMVPPage(dfSeasonScores,dfSeasonRaceCount,TrackIndex,dfAllTimeScores,dfA
   print('<br>')
   print('<div class=\"bar\"> </div>')
 
-def seasonalLeaderboardPage(season,TrackIndex,dfSeasonScores,dfSeasonRaceCount,dfSeasonWins,dfSeasonShock,dfSeasonBlue):
+def seasonalLeaderboardPage(season,TrackIndex,dfSeasonScores,dfSeasonRaceCount,dfSeasonWins,dfSeasonShock,dfSeasonBlue,dfSeasonFirst,dfSeasonSecond,dfSeasonThird,dfSeasonFourth):
 
   #page split
   print('<p style= \"page-break-after: always;\"> &nbsp; </p>')
@@ -454,10 +473,7 @@ def seasonalLeaderboardPage(season,TrackIndex,dfSeasonScores,dfSeasonRaceCount,d
   print('<h1> Seasonal Leaderboards </h1>')
   print('</div>')
 
-  #6 stat boxes for seasonal leaderboards
-
-  #a work around to get around the google api limit on 300 reads per minute, I do not have the current budget
-  #to pay for more api calls lol
+  #stat boxes for seasonal leaderboards
 
   #generate the leaderboards
   kartSeasonalLeaderboard= getSeedings(season,TrackIndex,display = False)
@@ -507,12 +523,50 @@ def seasonalLeaderboardPage(season,TrackIndex,dfSeasonScores,dfSeasonRaceCount,d
   print('</div>')
   print('</div>')
 
-  #end of page bar
+  #bar
   print('<br>')
   print('<div class=\"bar\"> </div>')
+  print('<br>')
+  
+  #first places
+  print("<div class=\"statbox2\">")
+  print('<h2> First Place Finishes </h2>')
+  print(dfSeasonFirst.to_html())
+  print('</div>') 
+  #second places
+  print("<div class=\"statbox2\">")
+  print('<h2> Top 2 Finishes </h2>')
+  print(dfSeasonSecond.to_html())
+  print('</div>')
+  #third places
+  print("<div class=\"statbox2\">")
+  print('<h2> Top 3 Finishes </h2>')
+  print(dfSeasonThird.to_html())
+  print('</div>')
+  print('</div>')
+
+  #bar
+  print('<br>')
+  print('<div class=\"bar\"> </div>')
+  print('<br>')
+
+  #Fourth places
+  print("<div class=\"statbox2\">")
+  print('<h2> Top 4 Finishes </h2>')
+  print(dfSeasonFourth.to_html())
+  print('</div>')
+  print('</div>')
+
+
+  ##percentages go here
+
+  #end of pahe bar
+  print('<br>')
+  print('<div class=\"bar\"> </div>')
+  print('<br>')
 
 def allTimeLeaderboardsPages(dfPowerPoints1,dfNormalizedKart1,dfKartRating1,dfMiscScore1,dfAllTimeWins1,dfAllTimeAverage1,dfAllTimeShockDodges1,
-    dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1):
+    dfAllTimeBlueShells1,dfAllTimeRaceCount1,dfAllTimeTotalPoints1,dfAllTimeFirst,dfAllTimeSecond,dfAllTimeThird,dfAllTimeFourth):
 
   #Page 4, All-Time Leaderboards
  
@@ -593,7 +647,43 @@ def allTimeLeaderboardsPages(dfPowerPoints1,dfNormalizedKart1,dfKartRating1,dfMi
   print('<div class = \"bar\"> </div>')
   print('<br>')
 
-  #statbox 10 points scored
+  #disclamer on the stat being tracked
+  print('<div class =\"center\">')
+  print("<h7> Placement Stats Started Season 3 </h7>")
+  print('<br>')
+  print('</div>')
+
+  #statbox first places
+  print("<div class=\"statbox2\">")
+  print('<h2> First Place Finishes</h2>')
+  print(dfAllTimeFirst.to_html())
+  print('</div>')
+  #statbox second places
+  print("<div class=\"statbox2\">")
+  print('<h2> Top 2 Finsihes</h2>')
+  print(dfAllTimeSecond.to_html())
+  print('</div>')
+  #statbox 3rd places
+  print("<div class=\"statbox2\">")
+  print('<h2> Top 3 Finishes </h2>')
+  print(dfAllTimeThird.to_html())
+  print('</div>')
+
+
+  #break line
+  print('<br>')
+  print('<br>')
+  print('<div class = \"bar\"> </div>')
+  print('<br>')
+
+  #statbox 4th places
+  print("<div class=\"statbox2\">")
+  print('<h2> Top 4 Finishes </h2>')
+  print(dfAllTimeFourth.to_html())
+  print('</div>')
+
+
+  #statbox points scored
   print("<div class=\"statbox2\">")
   print('<h2> Total Points</h2>')
   print(dfAllTimeTotalPoints1.to_html())
@@ -645,7 +735,7 @@ def KVRHistoryPage(player,dfKVR):
   #page header
   #header
   print('<div class =\"center\">')
-  print('<h1> Kart Versus Raiting History (KVR) </h1>')
+  print('<h1> Kart Versus Rating History (KVR) </h1>')
   print('</div>')
 
   #break line

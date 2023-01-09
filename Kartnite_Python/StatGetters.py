@@ -781,6 +781,7 @@ def getKartRating(dfScores,dfRaces,dfWins,player,TrackIndex):
 import matplotlib.pyplot as plt
 import mpld3
 def make_line_plot(df, column):
+    plt.clf()
     # Remove the first two rows
     df = df.iloc[2:]
     #make everything ints

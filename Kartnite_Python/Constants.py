@@ -2,7 +2,7 @@
 #function will be used here as of now it is just a file to hold the player awards, but other things may be held here in the future
 
 #---CREDITS and other info-------
-VERSION = 'v3.3.1'
+VERSION = 'v3.3.2'
 CONTRIBUTORS = 'Patrick Marinich'
 #------------------------------------
 
